@@ -1,5 +1,6 @@
 const express= require('express');
 const response = require('../../network/response');
+const controller = require('./controller');
 const router= express.Router();
 
 router.get('/', function(req, resp){
@@ -18,11 +19,16 @@ router.post('/', function(req, resp){
     //console.log(req.query);
     //enviado estado de la petición
     //resp.status(201).send({error: '',body:'Creado Correctamente'});
-    if(req.query.error=='ok'){
-        response.error(req, resp, 'Error Inesperado', 500, 'Es Solo una simulación de los errores');
-    }else{
-        response.success(req, resp, 'Creado Correctamente',201);
-    }
+
+
+    controller.addMessage(req.body.user, req.body.Message)
+    .then((fullMessage)=>{
+        response.success(req, resp,fullMessage,201);
+
+    }).catch(e=>{
+        response.error(req, resp, 'Error Inesperado', 400, 'Es Solo una simulación de los errores');
+    });
+
     
     //resp.send('Mensaje' +req.body.apellido+'Añadido correctamente....');
 });
