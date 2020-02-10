@@ -4,14 +4,29 @@ const controller = require('./controller');
 const router= express.Router();
 
 router.get('/', function(req, resp){
+    controller.getMessage()
+    .then((messagelist)=>{
+
+        response.success(req, resp, messagelist, 200);
+
+    }).catch(e=>{
+        response.error(req, resp, 'Unexpected Error', 500,e);
+
+    });
+
+    
+    
+    
+    
+    
     //lo que llega
     //console.log(req.headers);
-    resp.header({
+  //  resp.header({
         //trabajo con cabeceras personalizadas
-        "custom-header":"nuestro Valor Personalizado"
-    });
+        //"custom-header":"nuestro Valor Personalizado"
+   // });
     //resp.send('Lista de Mensajes');
-    response.success(req, resp, 'Lista de Mensajes');
+   // response.success(req, resp, 'Lista de Mensajes');
 });
 
 router.post('/', function(req, resp){
