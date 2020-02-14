@@ -1,28 +1,30 @@
 //const list = [];
-//const db = require('mongodb').MongoClient;
+
+//const db = require('mongodb');
 const Model= require('./model');
 
+/*************************************************************/
+const MongoClient = require('mongodb').MongoClient;
 
-
-
-
-
-
-var MongoClient = require('mongodb').MongoClient;
-MongoClient.Promise =global.Promise;
-var uri = "mongodb://db_user_platzi_node:db_user_platzi_node@cluster0-shard-00-00-y3yen.mongodb.net:27017,cluster0-shard-00-01-y3yen.mongodb.net:27017,cluster0-shard-00-02-y3yen.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
-MongoClient.connect(uri, function(err, client) {
-  const collection = client.db("test").collection("Chat");
+const uri = "mongodb+srv://adminplatzi:TiHr2y61qZuheRPj@cluster0-y3yen.mongodb.net/telgrom.telegrom?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true ,  useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("telegrom").collection("telegrom");
   // perform actions on the collection object
   client.close();
 });
 
+
+//TiHr2y61qZuheRPj
+
+
+/*************************************************************/
 console.log('[db] Conectada con exito');
 function addMessage(message) {
     const myMessage = new Model(message);
 
     myMessage.save
-    
+    console.log();
     //list.push(message);
 }
 
