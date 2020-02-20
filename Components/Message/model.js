@@ -1,9 +1,7 @@
 const mongoose =require('mongoose');
-
-const Schema= mongoose.Schema;
+const {Schema}= mongoose;
 
 const mySchema= new Schema({
-
     user:String,
     message: {
         type:String,
@@ -13,5 +11,4 @@ const mySchema= new Schema({
 
 });
 
-const model= mongoose.model('Message',mySchema);
-module.exports= model;
+module.exports= mongoose.model('Message',mySchema);

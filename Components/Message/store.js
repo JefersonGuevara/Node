@@ -4,17 +4,14 @@
 const Model= require('./model');
 
 /*************************************************************/
-const MongoClient = require('mongodb').MongoClient;
-
-const uri = "mongodb+srv://adminplatzi:TiHr2y61qZuheRPj@cluster0-y3yen.mongodb.net/telgrom.telegrom?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true ,  useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("telegrom").collection("telegrom");
-  // perform actions on the collection object
-  client.close();
-});
+const mongoose = require('mongoose');
+const {MONGO_URI} = require("../../Config")
 
 
+
+//const uri = "mongodb+srv://adminplatzi:TiHr2y61qZuheRPj@cluster0-y3yen.mongodb.net/telgrom.telegrom?retryWrites=true&w=majority";
+//
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 //TiHr2y61qZuheRPj
 
 
@@ -23,8 +20,8 @@ console.log('[db] Conectada con exito');
 function addMessage(message) {
     const myMessage = new Model(message);
 
-    myMessage.save
-    console.log();
+    Model.create([myMessage])
+        console.log();
     //list.push(message);
 }
 
